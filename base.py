@@ -241,5 +241,5 @@ if __name__ == '__main__':
     R12=5.0, R13=8.0, R17=9.0, R35=10.0, R7X=11.0, 
     X=12.0, Z=13.1)
 
-  data0 == data1
+  data0.__eq__(data1)
   data0.__eq__(deta2)

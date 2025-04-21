@@ -30,7 +30,7 @@ class Forward:
     '''
     L9**2 = L6**2 + L8**2 - 2*L6*L8*cos(RS2)
     L6**2 - 2*L6*L8*cos(RS2) + L8**2 - L9**2 = 0
-    '''
+    ''' 
     _a = 1
     _b = -2*L8*cos(RS2)
     _c = pow(L8,2) - pow(L9,2)
@@ -64,6 +64,13 @@ class Forward:
     return L7
   
   def F6_L7_to_R17(self,L7):
+    '''
+    L6**2 = L3**2 + L5**2 - 2*L3*L5*cos(R35)
+    L6**2 - L3**2 - L5**2 = - 2*L3*L5*cos(R35)
+    (L6**2 - L3**2 - L5**2) / (-2*L3*L5) = cos(R35)
+    R35 = acos( (L6**2 - L3**2 - L5**2) / (-2*L3*L5) )
+    R35 = acos( (L3**2+L5**2-L6**2) / (2*L3*L5) )
+    '''
     T = (pow(L1,2) + pow(L7,2) - pow(L2,2)) / (2*L1*L7)
     R17 = acos(T)
     logger.debug('%-20s: L1=%f, L7=%f, T=%f, R17=%f [ %f° ]' % (funcname(), L1, L7, T, R17, degrees(R17)))
@@ -77,13 +84,11 @@ class Forward:
   def F8_L7R7X_to_xz(self,L7,R7X):
     X = L7*cos(R7X)
     Z = L7*sin(R7X)
-    
     if R7X > pi/2:
       X = -X
     elif R7X > pi:
       X = -X
       Z = -Z
-
     logger.debug('%-20s: L7=%f, R7X=%f [ %f° ], X=%f, Z=%f' % (funcname(), L7, R7X, degrees(R7X), X, Z))
     return X,Z
 
@@ -104,6 +109,7 @@ class Forward:
     R17 = self.F6_L7_to_R17(L7)
     R7X = self.F7_RS1R17_to_R7X(RS1,R17)
     X,Z = self.F8_L7R7X_to_xz(L7,R7X)
+    
     if RS1+R17>pi/2: X=-X
 
     #计算膝盖坐标

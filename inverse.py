@@ -114,7 +114,7 @@ if __name__ == '__main__':
   #! 日志程序
   logger.setLevel(logging.NOTSET)
   logger.setLevel(logging.INFO)
-  logger.setLevel(logging.DEBUG)
+  # logger.setLevel(logging.DEBUG)
 
   #! 正解数据计算
   kf = Forward()

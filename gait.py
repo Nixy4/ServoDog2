@@ -75,7 +75,6 @@ class Gait:
   
   def caculateOnePeriod(self):
     for t in self.t_values:
-      logger.debug('t: %f' % t)
       if t <= self.swingTime:
         x, z = self.swingPhase(t)
       elif t > self.swingTime and t <= self.period:
@@ -125,7 +124,8 @@ class Gait:
       self.pltAnimationShankObj = plt.plot([self.kdatas[frame*20].KX, self.x_values[frame*20]], [self.kdatas[frame*20].KZ, self.z_values[frame*20]], 'black', linewidth=5)
       self.pltAnimationToeObj = plt.plot(self.x_values[frame*20], self.z_values[frame*20], 'go', markersize=10)
       self.pltAnimationKneeObj = plt.plot(self.kdatas[frame*20].KX, self.kdatas[frame*20].KZ, 'go', markersize=10)
-
+      print('frame: %d, x: %f, z: %f, kx: %f, kz: %f' % (frame, self.x_values[frame*20], self.z_values[frame*20], self.kdatas[frame*20].KX, self.kdatas[frame*20].KZ))
+      
     #创建动画
     self.pltAnimationObj = FuncAnimation(
       fig       = plt.gcf(),          #figure对象
